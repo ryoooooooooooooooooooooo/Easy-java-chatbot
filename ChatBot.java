@@ -30,38 +30,7 @@ public class Chatbot{
         }
     }
 }
-
-
- public class ChatBot {
-     private static final Path KNOWLEDGE_FILE = Paths.get("knowledge.properties");
-     private final LinkedHashMap<String,String> knowledge = new LinkedHashMap<>();
-     private final Properties props = new Properties();
- 
-     public static void main(String[] args) throws Exception {
-         ChatBot bot = new ChatBot();
-         bot.loadKnowledge();
-         bot.run();
-     }
- 
-     private void loadKnowledge() {
-         if (Files.exists(KNOWLEDGE_FILE)) {
-             try (InputStream in = Files.newInputStream(KNOWLEDGE_FILE)) {
-                 props.load(in);
-                 for (String k : props.stringPropertyNames()) {
-                     knowledge.put(k, props.getProperty(k));
-                 }
-                 System.out.println("Knowledge loaded: " + knowledge.size() + " entries.");
-             } catch (IOException e) {
-                 System.err.println("Failed to load knowledge: " + e.getMessage());
-             }
-         } else {
-             // seed some defaults
-             knowledge.put("hello", "Hi there! How can I help?");
-             knowledge.put("how are you", "I'm a program, so I'm always OK. And you?");
-         }
-     }
- 
-     private void saveKnowledge() {
+    private void saveKnowledge() {
          try (OutputStream out = Files.newOutputStream(KNOWLEDGE_FILE)) {
              Properties p = new Properties();
              p.putAll(knowledge);
